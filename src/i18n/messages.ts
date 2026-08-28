@@ -94,7 +94,7 @@ export type Messages = {
 
 export const messages: Record<Locale, Messages> = {
   "pt-BR": {
-    metaTitle: "Grupo Monarca — Ecossistema de Negócios",
+    metaTitle: "Monarca Group",
     metaDescription:
       "O Grupo Monarca é um ecossistema empresarial que une educação, transporte, mineração, agronegócio e serviços financeiros para impulsionar o desenvolvimento da fronteira Brasil-Paraguai.",
     navQuemSomos: "Quem somos",
@@ -290,7 +290,7 @@ export const messages: Record<Locale, Messages> = {
     },
   },
   es: {
-    metaTitle: "Grupo Monarca — Ecosistema de Negocios",
+    metaTitle: "Monarca Group",
     metaDescription:
       "El Grupo Monarca es un ecosistema empresarial que une educación, transporte, minería, agronegocio y servicios financieros para impulsar el desarrollo de la frontera Brasil-Paraguay.",
     navQuemSomos: "Quiénes somos",
@@ -486,7 +486,7 @@ export const messages: Record<Locale, Messages> = {
     },
   },
   "en-US": {
-    metaTitle: "Monarca Group — Business Ecosystem",
+    metaTitle: "Monarca Group",
     metaDescription:
       "Monarca Group is a business ecosystem that brings together education, transportation, mining, agribusiness and financial services to drive development on the Brazil–Paraguay border.",
     navQuemSomos: "About us",

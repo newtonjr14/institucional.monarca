@@ -30,9 +30,12 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-6">
-        <Link to="/" className="shrink-0">
-          <BrandLogo className="h-14 md:h-16" />
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
+        <Link
+          to="/"
+          className="shrink-0 font-display text-lg font-bold tracking-wide"
+        >
+          MONARCA <span className="text-gold">GROUP</span>
         </Link>
         <nav className="hidden items-center gap-6 whitespace-nowrap text-sm font-medium text-muted-foreground lg:flex">
           {navItems.map((item) => (

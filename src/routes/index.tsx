@@ -25,13 +25,13 @@ const ogImage =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Grupo Monarca — Ecossistema de Negócios" },
+      { title: "Monarca Group" },
       {
         name: "description",
         content:
           "O Grupo Monarca é um ecossistema empresarial que une educação, transporte, mineração, agronegócio e serviços financeiros para impulsionar o desenvolvimento da fronteira Brasil-Paraguai.",
       },
-      { property: "og:title", content: "Grupo Monarca — Ecossistema de Negócios" },
+      { property: "og:title", content: "Monarca Group" },
       {
         property: "og:description",
         content:

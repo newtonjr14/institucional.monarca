@@ -20,7 +20,7 @@ export const Route = createFileRoute("/empresas/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Empresa não encontrada — Grupo Monarca" },
+          { title: "Empresa não encontrada — Monarca Group" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -29,9 +29,9 @@ export const Route = createFileRoute("/empresas/$slug")({
     const copy = messages["pt-BR"].empresas[empresa.slug];
     return {
       meta: [
-        { title: `${empresa.nome} — Grupo Monarca` },
+        { title: `${empresa.nome} — Monarca Group` },
         { name: "description", content: copy.desc },
-        { property: "og:title", content: `${empresa.nome} — Grupo Monarca` },
+        { property: "og:title", content: `${empresa.nome} — Monarca Group` },
         { property: "og:description", content: copy.desc },
         { property: "og:type", content: "website" },
         { property: "og:image", content: ogImage },
