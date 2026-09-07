@@ -380,18 +380,32 @@ function Projetos() {
               key={p.slug}
               to="/projetos/$slug"
               params={{ slug: p.slug }}
-              className="surface-panel group rounded-2xl p-8 transition-transform duration-300 hover:-translate-y-1.5"
+              className="surface-panel group flex h-full flex-col overflow-hidden rounded-2xl transition-transform duration-300 hover:-translate-y-1.5"
             >
-              <span className="inline-flex items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
-                {copy.tag}
-              </span>
-              <h3 className="mt-5 text-2xl font-bold">{copy.nome}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {copy.desc}
-              </p>
-              <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold">
-                {t.projetosCta} <ArrowRight className="h-4 w-4" />
-              </p>
+              {p.imagem ? (
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={p.imagem}
+                    alt={copy.nome}
+                    loading="lazy"
+                    width={1400}
+                    height={1000}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              ) : null}
+              <div className="flex flex-1 flex-col p-8">
+                <span className="inline-flex w-fit items-center rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
+                  {copy.tag}
+                </span>
+                <h3 className="mt-5 text-2xl font-bold">{copy.nome}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {copy.desc}
+                </p>
+                <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold">
+                  {t.projetosCta} <ArrowRight className="h-4 w-4" />
+                </p>
+              </div>
             </Link>
           );
         })}

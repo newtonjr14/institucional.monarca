@@ -1,5 +1,10 @@
 import type { EmpresaSlug, ProjetoSlug } from "@/lib/empresas";
 
+export type ProjetoFase = {
+  titulo: string;
+  desc: string;
+};
+
 export type EmpresaCopy = {
   tag: string;
   nome: string;
@@ -9,6 +14,10 @@ export type EmpresaCopy = {
   sobre: string[];
   servicos: string[];
   cta: string;
+  protocoloTitulo?: string;
+  galeriaTitulo?: string;
+  fases?: ProjetoFase[];
+  galeriaAlts?: string[];
 };
 
 export type TimelineItem = {
@@ -115,6 +124,7 @@ export type Messages = {
   footerRights: string;
   footerSignature: string;
   empresaSobre: string;
+  projetoSobre: string;
   empresaMove: string;
   empresaMoveGold: string;
   empresaServicos: string;

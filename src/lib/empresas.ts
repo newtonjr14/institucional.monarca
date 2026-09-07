@@ -17,6 +17,10 @@ import educacao from "@/assets/educacao.jpg";
 import mobilidade from "@/assets/mobilidade.jpg";
 import mineracao from "@/assets/mineracao.jpg";
 import heroAgro from "@/assets/hero-agro.jpg";
+import premiumRebanho from "@/assets/premium-rebanho.webp";
+import premiumCampo from "@/assets/premium-campo.webp";
+import premiumManejo from "@/assets/premium-manejo.webp";
+import premiumTransporte from "@/assets/premium-transporte.webp";
 
 export const EMPRESA_SLUGS = [
   "universidad-interamericana",
@@ -59,6 +63,8 @@ export interface Projeto {
   icon: LucideIcon;
   nome: string;
   estagio: "projeto";
+  imagem?: string;
+  galeria?: string[];
   links: { key: EmpresaLinkKey; href: string }[];
 }
 
@@ -224,6 +230,8 @@ export const projetos: Projeto[] = [
     icon: Beef,
     nome: "Monarca Premium",
     estagio: "projeto",
+    imagem: premiumRebanho,
+    galeria: [premiumCampo, premiumManejo, premiumTransporte],
     links: [{ key: "linkContato", href: "/#contato" }],
   },
   {
