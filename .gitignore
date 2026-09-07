@@ -15,6 +15,10 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+.env
+
+# Fotos enviadas pelo admin (as imagens seed em bike-*.jpg ficam no git)
+public/uploads/bikes/u-*
 
 # Wrangler / Cloudflare
 .wrangler/

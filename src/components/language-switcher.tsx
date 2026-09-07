@@ -24,21 +24,14 @@ export function LanguageSwitcher() {
           <span>{localeMeta[locale].short}</span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[13.5rem]">
+      <DropdownMenuContent align="end" className="min-w-[10.5rem]">
         {LOCALES.map((id) => (
           <DropdownMenuItem
             key={id}
             onSelect={() => setLocale(id)}
             className="cursor-pointer justify-between focus:bg-gold/15 focus:text-foreground"
           >
-            <span>
-              <span className="font-semibold text-gold">
-                {localeMeta[id].short}
-              </span>
-              <span className="ml-2 text-muted-foreground">
-                {localeMeta[id].label}
-              </span>
-            </span>
+            <span>{localeMeta[id].label}</span>
             {locale === id && <Check className="h-4 w-4 text-gold" />}
           </DropdownMenuItem>
         ))}

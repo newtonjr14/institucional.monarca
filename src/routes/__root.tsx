@@ -79,11 +79,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Monarca Group" },
+      { title: "Grupo Monarca" },
       {
         name: "description",
         content:
-          "Educação, agro & indústria, serviços financeiros e mobilidade elétrica integrados na fronteira Brasil-Paraguai.",
+          "Conheça as operações e os projetos do Grupo Monarca em educação, agropecuária, mineração, logística, serviços financeiros e mobilidade elétrica entre Brasil e Paraguai.",
       },
       { property: "og:type", content: "website" },
     ],

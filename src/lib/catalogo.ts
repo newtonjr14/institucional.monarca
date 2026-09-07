@@ -1,0 +1,118 @@
+export const CATEGORIAS = ["Urbana", "Clássica", "Off-Road", "Cargo"] as const;
+export type BikeCategoria = (typeof CATEGORIAS)[number];
+
+export type BikeSpec = { rotulo: string; valor: string };
+
+export type BikeModelo = {
+  id: string;
+  nome: string;
+  categoria: BikeCategoria;
+  destaque: string;
+  descricao: string;
+  fotos: string[];
+  specs: BikeSpec[];
+  recursos: string[];
+  preco: string;
+  publicado: boolean;
+};
+
+export const CATALOGO_WHATSAPP = "https://wa.me/556796770757";
+
+export function capaDoModelo(modelo: BikeModelo) {
+  return modelo.fotos[0] ?? "";
+}
+
+export const seedModelos: BikeModelo[] = [
+  {
+    id: "monarca-urban",
+    nome: "Monarca Urban",
+    categoria: "Urbana",
+    destaque: "A mais vendida para o dia a dia",
+    descricao:
+      "Moto elétrica urbana com desenho compacto, aceleração suave e autonomia pensada para o trajeto casa-trabalho na cidade.",
+    fotos: ["/uploads/bikes/bike-urban.jpg"],
+    specs: [
+      { rotulo: "Autonomia", valor: "até 65 km" },
+      { rotulo: "Velocidade", valor: "45 km/h" },
+      { rotulo: "Motor", valor: "1000 W" },
+      { rotulo: "Bateria", valor: "60V 20Ah removível" },
+    ],
+    recursos: [
+      "Farol full LED e painel digital",
+      "Bateria removível para recarga em casa",
+      "Freios a disco dianteiro e traseiro",
+      "Zero emissão de poluentes",
+    ],
+    preco: "Sob consulta",
+    publicado: true,
+  },
+  {
+    id: "monarca-classic",
+    nome: "Monarca Classic",
+    categoria: "Clássica",
+    destaque: "Design retrô, tecnologia atual",
+    descricao:
+      "Linhas clássicas em branco e dourado, conforto para dois passageiros e condução silenciosa — elegância com custo de recarga mínimo.",
+    fotos: ["/uploads/bikes/bike-classic.jpg"],
+    specs: [
+      { rotulo: "Autonomia", valor: "até 70 km" },
+      { rotulo: "Velocidade", valor: "45 km/h" },
+      { rotulo: "Motor", valor: "1200 W" },
+      { rotulo: "Bateria", valor: "60V 22Ah" },
+    ],
+    recursos: [
+      "Banco largo para dois ocupantes",
+      "Alarme com chave presencial",
+      "Porta-objetos frontal",
+      "Carregamento em tomada comum",
+    ],
+    preco: "Sob consulta",
+    publicado: true,
+  },
+  {
+    id: "monarca-trail",
+    nome: "Monarca Trail",
+    categoria: "Off-Road",
+    destaque: "Pneus largos para estrada de terra",
+    descricao:
+      "Bike elétrica fat bike com suspensão e pneus largos, feita para trilhas, propriedades rurais e o terreno irregular da região.",
+    fotos: ["/uploads/bikes/bike-sport.jpg"],
+    specs: [
+      { rotulo: "Autonomia", valor: "até 80 km" },
+      { rotulo: "Velocidade", valor: "32 km/h" },
+      { rotulo: "Motor", valor: "750 W" },
+      { rotulo: "Bateria", valor: "48V 17Ah" },
+    ],
+    recursos: [
+      "Pneus fat 26x4 para terra e areia",
+      "Suspensão dianteira com trava",
+      "Pedal assistido em 5 níveis",
+      "Quadro reforçado em alumínio",
+    ],
+    preco: "Sob consulta",
+    publicado: true,
+  },
+  {
+    id: "monarca-cargo",
+    nome: "Monarca Cargo",
+    categoria: "Cargo",
+    destaque: "Para entregas e frotas",
+    descricao:
+      "Solução de última milha para comércios e empresas: caçamba ampla, baixo custo por quilômetro e manutenção simples.",
+    fotos: ["/uploads/bikes/bike-cargo.jpg"],
+    specs: [
+      { rotulo: "Autonomia", valor: "até 60 km" },
+      { rotulo: "Carga útil", valor: "150 kg" },
+      { rotulo: "Motor", valor: "1000 W" },
+      { rotulo: "Bateria", valor: "48V 20Ah" },
+    ],
+    recursos: [
+      "Caçamba metálica e cesto frontal",
+      "Três rodas com maior estabilidade",
+      "Planos de frota para empresas",
+      "Personalização com a marca do cliente",
+    ],
+    preco: "Sob consulta",
+    publicado: true,
+  },
+];

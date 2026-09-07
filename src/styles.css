@@ -69,6 +69,7 @@
 }
 
 :root {
+  --header-h: 4rem;
   --radius: 0.625rem;
   --background: oklch(0.19 0.038 175);
   --foreground: oklch(0.97 0.012 100);
@@ -82,7 +83,7 @@
   --secondary: oklch(0.3 0.05 170);
   --secondary-foreground: oklch(0.97 0.012 100);
   --muted: oklch(0.28 0.04 172);
-  --muted-foreground: oklch(0.76 0.02 150);
+  --muted-foreground: oklch(0.86 0.016 148);
   --accent: oklch(0.72 0.19 145);
   --accent-foreground: oklch(0.18 0.04 165);
   --destructive: oklch(0.6 0.22 27);
@@ -126,6 +127,7 @@
 @layer base {
   html {
     scrollbar-gutter: stable;
+    scroll-padding-top: var(--header-h);
   }
 
   * {

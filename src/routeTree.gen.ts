@@ -10,11 +10,36 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FundadorCarlosBernardoRouteImport } from './routes/fundador-carlos-bernardo'
+import { Route as GovernancaRouteImport } from './routes/governanca'
+import { Route as AdminCatalogoRouteImport } from './routes/admin.catalogo'
+import { Route as CatalogoMonarcaBikeRouteImport } from './routes/catalogo.monarca-bike'
 import { Route as EmpresasSlugRouteImport } from './routes/empresas.$slug'
+import { Route as ProjetosSlugRouteImport } from './routes/projetos.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FundadorCarlosBernardoRoute = FundadorCarlosBernardoRouteImport.update({
+  id: '/fundador-carlos-bernardo',
+  path: '/fundador-carlos-bernardo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernancaRoute = GovernancaRouteImport.update({
+  id: '/governanca',
+  path: '/governanca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCatalogoRoute = AdminCatalogoRouteImport.update({
+  id: '/admin/catalogo',
+  path: '/admin/catalogo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoMonarcaBikeRoute = CatalogoMonarcaBikeRouteImport.update({
+  id: '/catalogo/monarca-bike',
+  path: '/catalogo/monarca-bike',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmpresasSlugRoute = EmpresasSlugRouteImport.update({
@@ -22,31 +47,78 @@ const EmpresasSlugRoute = EmpresasSlugRouteImport.update({
   path: '/empresas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
+  id: '/projetos/$slug',
+  path: '/projetos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/fundador-carlos-bernardo': typeof FundadorCarlosBernardoRoute
+  '/governanca': typeof GovernancaRoute
+  '/admin/catalogo': typeof AdminCatalogoRoute
+  '/catalogo/monarca-bike': typeof CatalogoMonarcaBikeRoute
   '/empresas/$slug': typeof EmpresasSlugRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/fundador-carlos-bernardo': typeof FundadorCarlosBernardoRoute
+  '/governanca': typeof GovernancaRoute
+  '/admin/catalogo': typeof AdminCatalogoRoute
+  '/catalogo/monarca-bike': typeof CatalogoMonarcaBikeRoute
   '/empresas/$slug': typeof EmpresasSlugRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/fundador-carlos-bernardo': typeof FundadorCarlosBernardoRoute
+  '/governanca': typeof GovernancaRoute
+  '/admin/catalogo': typeof AdminCatalogoRoute
+  '/catalogo/monarca-bike': typeof CatalogoMonarcaBikeRoute
   '/empresas/$slug': typeof EmpresasSlugRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/empresas/$slug'
+  fullPaths:
+    | '/'
+    | '/fundador-carlos-bernardo'
+    | '/governanca'
+    | '/admin/catalogo'
+    | '/catalogo/monarca-bike'
+    | '/empresas/$slug'
+    | '/projetos/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/empresas/$slug'
-  id: '__root__' | '/' | '/empresas/$slug'
+  to:
+    | '/'
+    | '/fundador-carlos-bernardo'
+    | '/governanca'
+    | '/admin/catalogo'
+    | '/catalogo/monarca-bike'
+    | '/empresas/$slug'
+    | '/projetos/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/fundador-carlos-bernardo'
+    | '/governanca'
+    | '/admin/catalogo'
+    | '/catalogo/monarca-bike'
+    | '/empresas/$slug'
+    | '/projetos/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FundadorCarlosBernardoRoute: typeof FundadorCarlosBernardoRoute
+  GovernancaRoute: typeof GovernancaRoute
+  AdminCatalogoRoute: typeof AdminCatalogoRoute
+  CatalogoMonarcaBikeRoute: typeof CatalogoMonarcaBikeRoute
   EmpresasSlugRoute: typeof EmpresasSlugRoute
+  ProjetosSlugRoute: typeof ProjetosSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +130,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fundador-carlos-bernardo': {
+      id: '/fundador-carlos-bernardo'
+      path: '/fundador-carlos-bernardo'
+      fullPath: '/fundador-carlos-bernardo'
+      preLoaderRoute: typeof FundadorCarlosBernardoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/governanca': {
+      id: '/governanca'
+      path: '/governanca'
+      fullPath: '/governanca'
+      preLoaderRoute: typeof GovernancaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/catalogo': {
+      id: '/admin/catalogo'
+      path: '/admin/catalogo'
+      fullPath: '/admin/catalogo'
+      preLoaderRoute: typeof AdminCatalogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/monarca-bike': {
+      id: '/catalogo/monarca-bike'
+      path: '/catalogo/monarca-bike'
+      fullPath: '/catalogo/monarca-bike'
+      preLoaderRoute: typeof CatalogoMonarcaBikeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/empresas/$slug': {
       id: '/empresas/$slug'
       path: '/empresas/$slug'
@@ -65,12 +165,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmpresasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projetos/$slug': {
+      id: '/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/projetos/$slug'
+      preLoaderRoute: typeof ProjetosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FundadorCarlosBernardoRoute: FundadorCarlosBernardoRoute,
+  GovernancaRoute: GovernancaRoute,
+  AdminCatalogoRoute: AdminCatalogoRoute,
+  CatalogoMonarcaBikeRoute: CatalogoMonarcaBikeRoute,
   EmpresasSlugRoute: EmpresasSlugRoute,
+  ProjetosSlugRoute: ProjetosSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,37 +1,49 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { useEffect } from "react";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { useI18n } from "@/i18n/locale-provider";
 import { messages } from "@/i18n/messages";
-import { empresas, getEmpresa } from "@/lib/empresas";
+import {
+  getEmpresa,
+  operacoes,
+  resolveEmpresaSlug,
+} from "@/lib/empresas";
 
 const ogImage =
   "https://id-preview--61a3e68d-1c13-4650-922f-3210fdb86d58.lovable.app/og-cover.jpg";
 
 export const Route = createFileRoute("/empresas/$slug")({
+  beforeLoad: ({ params }) => {
+    const canonical = resolveEmpresaSlug(params.slug);
+    if (canonical && canonical !== params.slug) {
+      throw redirect({
+        to: "/empresas/$slug",
+        params: { slug: canonical },
+      });
+    }
+  },
   loader: ({ params }) => {
     const empresa = getEmpresa(params.slug);
     if (!empresa) throw notFound();
-    return { empresa };
+    return { slug: empresa.slug };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
         meta: [
-          { title: "Empresa não encontrada — Monarca Group" },
+          { title: "Empresa não encontrada — Grupo Monarca" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
-    const { empresa } = loaderData;
-    const copy = messages["pt-BR"].empresas[empresa.slug];
+    const copy = messages["pt-BR"].empresas[loaderData.slug];
     return {
       meta: [
-        { title: `${empresa.nome} — Monarca Group` },
+        { title: `${copy.nome} — Grupo Monarca` },
         { name: "description", content: copy.desc },
-        { property: "og:title", content: `${empresa.nome} — Monarca Group` },
+        { property: "og:title", content: `${copy.nome} — Grupo Monarca` },
         { property: "og:description", content: copy.desc },
         { property: "og:type", content: "website" },
         { property: "og:image", content: ogImage },
@@ -44,15 +56,22 @@ export const Route = createFileRoute("/empresas/$slug")({
 });
 
 function EmpresaPage() {
-  const { empresa } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const empresa = getEmpresa(slug);
   const { t } = useI18n();
+  if (!empresa) return null;
+
   const Icon = empresa.icon;
   const copy = t.empresas[empresa.slug];
-  const relacionadas = empresas.filter((e) => e.slug !== empresa.slug).slice(0, 3);
+  const relacionadas = operacoes()
+    .filter((e) => e.slug !== empresa.slug)
+    .slice(0, 3);
+  const estagioLabel =
+    empresa.estagio === "memoria" ? t.estagioMemoria : t.estagioOperacao;
 
   useEffect(() => {
-    document.title = `${empresa.nome} — ${t.metaTitle}`;
-  }, [empresa.nome, t.metaTitle]);
+    document.title = `${copy.nome} — ${t.metaTitle}`;
+  }, [copy.nome, t.metaTitle]);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -63,7 +82,7 @@ function EmpresaPage() {
           <>
             <img
               src={empresa.imagem}
-              alt={empresa.nome}
+              alt={copy.nome}
               width={1920}
               height={1080}
               className="absolute inset-0 h-full w-full object-cover"
@@ -76,14 +95,43 @@ function EmpresaPage() {
         )}
         <div className="relative mx-auto flex min-h-[60vh] max-w-6xl flex-col justify-end px-6 pb-16 pt-32">
           <span className="inline-flex w-fit items-center gap-2 rounded-full bg-gold/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold backdrop-blur">
-            <Icon className="h-3.5 w-3.5" /> {copy.tag}
+            <Icon className="h-3.5 w-3.5" /> {copy.tag} · {estagioLabel}
           </span>
           <h1 className="mt-5 max-w-3xl text-5xl font-black leading-[1.02] md:text-6xl">
-            {empresa.nome}
+            {copy.nome}
           </h1>
+          {empresa.razaoSocial ? (
+            <p className="mt-3 text-sm text-muted-foreground">
+              {t.empresaRazaoSocial}: {empresa.razaoSocial}
+            </p>
+          ) : null}
           <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
             {copy.desc}
           </p>
+          {empresa.slug === "mobilidade-eletrica" ? (
+            <Link
+              to="/catalogo/monarca-bike"
+              className="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-6 py-3 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
+            >
+              {copy.cta} <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          ) : empresa.slug === "vanbank" ? (
+            <a
+              href="https://playstore.vanbank.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-6 py-3 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
+            >
+              {copy.cta} <ArrowUpRight className="h-4 w-4" />
+            </a>
+          ) : (
+            <a
+              href="/#contato"
+              className="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-6 py-3 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
+            >
+              {copy.cta} <ArrowUpRight className="h-4 w-4" />
+            </a>
+          )}
         </div>
       </section>
 
@@ -92,13 +140,12 @@ function EmpresaPage() {
           <div>
             <p className="eyebrow">{t.empresaSobre}</p>
             <h2 className="mt-4 text-3xl font-black md:text-4xl">
-              {t.empresaMove}{" "}
-              <span className="text-gradient-gold">{t.empresaMoveGold}</span>
+              {copy.titulo}
             </h2>
             {copy.sobre.map((paragrafo) => (
               <p
                 key={paragrafo.slice(0, 40)}
-                className="mt-5 leading-relaxed text-muted-foreground"
+                className="mt-5 leading-relaxed text-foreground/88"
               >
                 {paragrafo}
               </p>
@@ -113,7 +160,7 @@ function EmpresaPage() {
               {copy.servicos.map((s) => (
                 <li key={s} className="flex items-start gap-3 text-sm">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                  <span className="text-muted-foreground">{s}</span>
+                  <span className="text-foreground/80">{s}</span>
                 </li>
               ))}
             </ul>
@@ -160,8 +207,8 @@ function EmpresaPage() {
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/15 text-gold">
                     <e.icon className="h-6 w-6" strokeWidth={1.8} />
                   </span>
-                  <h3 className="mt-5 text-lg font-bold">{e.nome}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                  <h3 className="mt-5 text-lg font-bold">{relatedCopy.nome}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {relatedCopy.desc}
                   </p>
                   <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
