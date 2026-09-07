@@ -183,7 +183,7 @@ export const ptBR: Messages = {
   contatoAtuacao: "Atuação",
   contatoRegiao: "Fronteira Brasil–Paraguai",
   footerRights: "Grupo Monarca. Todos os direitos reservados.",
-  footerSignature: "Desenvolvido e mantido pela Engenharia de Software",
+  footerSignature: "Desenvolvido e mantido por Monarca Tech",
   empresaSobre: "Sobre a operação",
   projetoSobre: "Sobre o projeto",
   empresaMove: "O que esta frente",
